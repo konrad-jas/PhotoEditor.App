@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using PhotoEditor.ViewModels;
 
 namespace PhotoEditor.Views
 {
@@ -14,5 +8,11 @@ namespace PhotoEditor.Views
         {
             InitializeComponent();
         }
+
+	    public void Init(PreviewViewModel previewViewModel, FlowBuilderViewModel flowBuilderViewModel)
+	    {
+		    PreviewPage.BindingContext = previewViewModel;
+		    FlowBuilderPage.BindingContext = flowBuilderViewModel;
+	    }
     }
 }

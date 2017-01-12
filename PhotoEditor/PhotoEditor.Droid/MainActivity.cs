@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Ninject;
 
 namespace PhotoEditor.Droid
 {
@@ -20,7 +21,8 @@ namespace PhotoEditor.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+			var container = new StandardKernel();
+            LoadApplication(new App(container));
         }
     }
 }

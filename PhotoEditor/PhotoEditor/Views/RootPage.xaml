@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:PhotoEditor.Views;assembly=PhotoEditor"
              x:Class="PhotoEditor.Views.RootPage" Title="Filters App">
   <TabbedPage.Children>
-	<views:PreviewPage Title="Preview"/>
-	<views:FlowBuilderPage Title="Flow builder"/>
+	<views:PreviewPage x:Name="PreviewPage" Title="Preview"/>
+	<views:FlowBuilderPage x:Name="FlowBuilderPage" Title="Flow builder"/>
   </TabbedPage.Children>
 </TabbedPage>

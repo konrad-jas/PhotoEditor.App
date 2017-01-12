@@ -4,7 +4,7 @@
              x:Class="PhotoEditor.Views.PreviewPage">
   <StackLayout>
 	<ScrollView>
-	  
+	  <Image Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="200"/>
 	</ScrollView>
   </StackLayout>
 </ContentPage>

@@ -38,9 +38,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IImageProvider.cs" />
+    <Compile Include="Services\Stubs\ImageProviderStub.cs" />
+    <Compile Include="Utility\ServicesModule.cs" />
+    <Compile Include="Utility\StubServicesModule.cs" />
+    <Compile Include="Utility\ViewModelsModule.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\PreviewPage.cs" />
+    <Compile Include="ViewModels\FlowBuilderViewModel.cs" />
+    <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\FlowBuilderPage.xaml.cs">
       <DependentUpon>FlowBuilderPage.xaml</DependentUpon>
     </Compile>
@@ -58,6 +65,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\portable-net4+sl5+wp8+win8+wpa81+monotouch+monoandroid+Xamarin.iOS\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.175\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>

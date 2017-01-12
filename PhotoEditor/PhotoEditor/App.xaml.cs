@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ninject;
+using PhotoEditor.Utility;
 using PhotoEditor.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,10 +13,14 @@ namespace PhotoEditor
 {
     public partial class App : Application
     {
-        public App()
+		public static StandardKernel Container { get; private set; }
+        public App(StandardKernel container)
         {
             InitializeComponent();
-            MainPage = new RootPage();
+	        Container = container;
+			var rootPage = new RootPage();
+	        Bootstrapper._initialize(rootPage);
+	        MainPage = rootPage;
         }
 
         protected override void OnStart()
