@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
-namespace PhotoEditor
+namespace PhotoEditor.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class PreviewPage : ContentPage
     {
-        public MainPage()
+        public PreviewPage()
         {
             InitializeComponent();
         }

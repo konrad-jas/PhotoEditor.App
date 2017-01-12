@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using PhotoEditor.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PhotoEditor
 {
     public partial class App : Application
@@ -12,8 +14,7 @@ namespace PhotoEditor
         public App()
         {
             InitializeComponent();
-
-            MainPage = new PhotoEditor.MainPage();
+            MainPage = new RootPage();
         }
 
         protected override void OnStart()
