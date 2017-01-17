@@ -23,7 +23,7 @@ namespace PhotoEditor.ViewModels
 	        _filtersProvider = filtersProvider;
 	        _popupInflater = popupInflater;
 	        ChooseImageCommand = new Command(ChooseImageAction);
-            FilterCommand = new Command<FilterType>(FilterAction, CanFilter);
+            FilterCommand = new Command<FilterType>(FilterAction);
 	        var filters = _filtersProvider.GetFilters().ToList();
 	        foreach (var filter in filters)
 	        {
@@ -32,20 +32,25 @@ namespace PhotoEditor.ViewModels
 	        Filters = filters;
 		}
 
-	    private bool CanFilter(FilterType arg)
-	    {
-	        return ImageChosen;
-	    }
-
 	    private async void FilterAction(FilterType obj)
 	    {
-	        if (CanFilter(obj) == false)
-	            return;
-
+	        //if (ImageChosen == false)
+	        //{
+	        //    await _popupInflater.InflatePopup("Error", "Please choose image first", "Ok");
+	        //    return;
+	        //}
+            MessagingCenter.Subscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process",
+                async (model, options) =>
+                {
+                    await ProcessFilter(obj, options);
+                });
 	        if(_filtersProvider.GetFilterOptions(obj).Any())
 	            await _popupInflater.ShowParamsPicker(obj);
+	    }
 
-            
+	    private async Task ProcessFilter(FilterType filterType, IEnumerable<FilterOption> options)
+	    {
+	        MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
 	    }
 
 	    public Command<FilterType> FilterCommand { get; set; }
