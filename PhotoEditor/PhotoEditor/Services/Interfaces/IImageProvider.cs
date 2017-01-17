@@ -1,7 +1,10 @@
-﻿namespace PhotoEditor.Services.Interfaces
+﻿using System.IO;
+using System.Threading.Tasks;
+
+namespace PhotoEditor.Services.Interfaces
 {
 	public interface IImageProvider
 	{
-		string GetImagePath();
+		Task<Stream> GetImage();
 	}
 }

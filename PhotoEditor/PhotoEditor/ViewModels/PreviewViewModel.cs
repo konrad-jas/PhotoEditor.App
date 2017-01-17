@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ExifLib;
@@ -12,14 +13,14 @@ namespace PhotoEditor.ViewModels
 {
 	public class PreviewViewModel : BaseViewModel
 	{
-	    private readonly IMediaPicker _mediaPicker;
+	    private readonly IImageProvider _imageProvider;
 	    private readonly IFiltersProvider _filtersProvider;
 	    private readonly IPopupInflater _popupInflater;
-	    private string _imagePath;
+	    private Stream _selectedImage;
 
-	    public PreviewViewModel(IMediaPicker mediaPicker, IFiltersProvider filtersProvider, IPopupInflater popupInflater)
+	    public PreviewViewModel(IImageProvider imageProvider, IFiltersProvider filtersProvider, IPopupInflater popupInflater)
 		{
-	        _mediaPicker = mediaPicker;
+	        _imageProvider = imageProvider;
 	        _filtersProvider = filtersProvider;
 	        _popupInflater = popupInflater;
 	        ChooseImageCommand = new Command(ChooseImageAction);
@@ -57,30 +58,21 @@ namespace PhotoEditor.ViewModels
 
 	    public List<FilterNO> Filters { get; set; }
 
-	    public bool ImageChosen => string.IsNullOrWhiteSpace(_imagePath) == false;
+	    public bool ImageChosen => ImageSource != null;
 
 	    public ImageSource ImageSource { get; set; }
 
 		public Command ChooseImageCommand { get; private set; }
-		private async void ChooseImageAction()
-		{
-		    try
-		    {
-		        var media = await _mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions {PercentQuality = 50});
-		        _imagePath = media.Path;
-		        ImageSource = ImageSource.FromStream(() =>
-		        {
-		            var stream = media.Source;
-		            media.Dispose();
-		            return stream;
-		        });
-		        RaisePropertyChanged(() => ImageSource);
-		        RaisePropertyChanged(() => ImageChosen);
-                FilterCommand.ChangeCanExecute();
-		    }
-		    catch (TaskCanceledException)
-		    {
-		    }
-		}
+
+	    private async void ChooseImageAction()
+	    {
+	        var media = await _imageProvider.GetImage();
+	        _selectedImage?.Dispose();
+	        _selectedImage = media;
+	        ImageSource = ImageSource.FromStream(() => media);
+	        RaisePropertyChanged(() => ImageSource);
+	        RaisePropertyChanged(() => ImageChosen);
+	        FilterCommand.ChangeCanExecute();
+	    }
 	}
 }

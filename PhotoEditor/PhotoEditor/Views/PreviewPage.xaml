@@ -14,7 +14,7 @@
         <RowDefinition Height="*"></RowDefinition>
       </Grid.RowDefinitions>
       <Button BorderColor="Blue" BorderWidth="10" 
-        Text="Tap to select image" TextColor="Black"
+        Text="Tap to select image"
         Grid.Row="0"
         Command="{Binding ChooseImageCommand}"
         IsVisible="{Binding ImageChosen, Converter={StaticResource InvertedBoolConverter}}"/>

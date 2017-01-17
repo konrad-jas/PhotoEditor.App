@@ -13,6 +13,7 @@ namespace PhotoEditor.Views
         public PreviewPage()
         {
             InitializeComponent();
+
         }
 
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
