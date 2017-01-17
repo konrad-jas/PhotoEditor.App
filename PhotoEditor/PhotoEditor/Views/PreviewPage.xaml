@@ -4,7 +4,7 @@
              x:Class="PhotoEditor.Views.PreviewPage">
   <ScrollView>
   <StackLayout>
-	  <Image Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="200" BackgroundColor="Blue">
+	  <Image Source="{Binding ImageSource}" Aspect="AspectFill" HeightRequest="200" BackgroundColor="Blue">
         <Image.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding ChooseImageCommand}"></TapGestureRecognizer>
         </Image.GestureRecognizers>>

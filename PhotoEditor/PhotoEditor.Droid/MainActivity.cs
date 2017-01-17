@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Ninject;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
 
 namespace PhotoEditor.Droid
 {
@@ -22,6 +24,8 @@ namespace PhotoEditor.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 			var container = new StandardKernel();
+            var device = AndroidDevice.CurrentDevice;
+            container.Bind<IMediaPicker>().ToMethod(context => device.MediaPicker).InTransientScope();
             LoadApplication(new App(container));
         }
     }

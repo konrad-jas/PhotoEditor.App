@@ -13,6 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Ninject;
+using Xamarin.Forms;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
+using NavigationEventArgs = Windows.UI.Xaml.Navigation.NavigationEventArgs;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,6 +34,8 @@ namespace PhotoEditor.WinPhone
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
 			var container = new StandardKernel();
+            var device = DependencyService.Get<IDevice>();
+            container.Bind<IMediaPicker>().ToMethod(context => device.MediaPicker).InTransientScope();
             LoadApplication(new PhotoEditor.App(container));
         }
 

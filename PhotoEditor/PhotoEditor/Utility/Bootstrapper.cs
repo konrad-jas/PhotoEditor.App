@@ -5,6 +5,10 @@ using Ninject.Modules;
 using PhotoEditor.Services.Interfaces;
 using PhotoEditor.ViewModels;
 using PhotoEditor.Views;
+using Xamarin.Forms;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
 
 namespace PhotoEditor.Utility
 {
@@ -21,7 +25,7 @@ namespace PhotoEditor.Utility
 		{
 			App.Container.Load(new List<NinjectModule>
 			{
-				new ServicesModule(),
+				new StubServicesModule(),
 				new ViewModelsModule()
 			});
 		}

@@ -1,25 +1,39 @@
-﻿using PhotoEditor.Services.Interfaces;
+﻿using System.Threading.Tasks;
+using PhotoEditor.Services.Interfaces;
 using Xamarin.Forms;
+using XLabs.Platform.Services.Media;
 
 namespace PhotoEditor.ViewModels
 {
 	public class PreviewViewModel : BaseViewModel
 	{
-		private readonly IImageProvider _imageProvider;
+	    private readonly IMediaPicker _mediaPicker;
 
-		public PreviewViewModel(IImageProvider imageProvider)
+	    public PreviewViewModel(IMediaPicker mediaPicker)
 		{
-			_imageProvider = imageProvider;
-			ChooseImageCommand = new Command(ChooseImageAction);
+	        _mediaPicker = mediaPicker;
+	        ChooseImageCommand = new Command(ChooseImageAction);
 		}
 
-		public string ImagePath { get; set; }
+		public ImageSource ImageSource { get; set; }
 
 		public Command ChooseImageCommand { get; private set; }
-		private void ChooseImageAction()
+		private async void ChooseImageAction()
 		{
-			ImagePath = _imageProvider.GetImagePath();
-			RaisePropertyChanged(() => ImagePath);
+		    try
+		    {
+		        var media = await _mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions {PercentQuality = 50});
+		        ImageSource = ImageSource.FromStream(() =>
+		        {
+		            var stream = media.Source;
+		            media.Dispose();
+		            return stream;
+		        });
+                RaisePropertyChanged(() => ImageSource);
+		    }
+		    catch (TaskCanceledException)
+		    {
+		    }
 		}
 	}
 }
