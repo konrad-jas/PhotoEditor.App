@@ -11,6 +11,10 @@ namespace PhotoEditor.ViewModels
 		public bool Busy { get; private set; }
 		private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
 
+	    public virtual void Init(object args)
+	    {
+	    }
+
 		public async void RunInBackground<TArg>(Func<Task<TArg>> backgroundTask, Action<TArg> callbackAction = null)
 		{
 			await Task.Run(() => _resetEvent.WaitOne());

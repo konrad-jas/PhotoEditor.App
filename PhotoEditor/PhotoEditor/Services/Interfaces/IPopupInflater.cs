@@ -7,5 +7,6 @@ namespace PhotoEditor.Services.Interfaces
     {
         Task InflatePopup(string title, string message, string confirmation);
         Task ShowParamsPicker(FilterType filter);
+        Task ClosePopup();
     }
 }

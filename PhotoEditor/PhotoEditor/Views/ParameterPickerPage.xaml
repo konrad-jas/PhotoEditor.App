@@ -11,7 +11,8 @@
   <ListView x:Name="ListView" ItemsSource="{Binding FilterOptions}" ItemSelected="ListView_OnItemSelected">
     <ListView.ItemTemplate>
       <DataTemplate>
-        <EntryCell Text="{Binding Value, Converter={StaticResource IntToStringConverter}" Label="{Binding Name}"></EntryCell>
+        <EntryCell Text="{Binding Value, Converter={StaticResource IntToStringConverter}, Mode=TwoWay}"
+          Label="{Binding Name}"/>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>

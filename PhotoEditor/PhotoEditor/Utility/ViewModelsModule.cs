@@ -9,6 +9,7 @@ namespace PhotoEditor.Utility
 		{
 			Bind<PreviewViewModel>().ToSelf();
 			Bind<FlowBuilderViewModel>().ToSelf();
+		    Bind<ParamsPickerViewModel>().ToSelf();
 		}
 	}
 }
