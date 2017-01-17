@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PhotoEditor.ViewModels
 {
-	public abstract class BaseViewModel : INotifyPropertyChanged
+	public abstract class BaseViewModel : NotificationObject
 	{
 		public bool Busy { get; private set; }
 		private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
@@ -21,16 +21,6 @@ namespace PhotoEditor.ViewModels
 
 			Busy = false;
 			_resetEvent.Set();
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
-		{
-			var memberExpr = propertyExpression.Body as MemberExpression;
-			var memberName = memberExpr?.Member.Name;
-			if(memberName != null)
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(memberName));
 		}
 	}
 }

@@ -1,4 +1,6 @@
 ﻿using Ninject.Modules;
+using PhotoEditor.Services;
+using PhotoEditor.Services.Interfaces;
 
 namespace PhotoEditor.Utility
 {
@@ -6,6 +8,7 @@ namespace PhotoEditor.Utility
 	{
 		public override void Load()
 		{
+		    Bind<IFiltersProvider>().To<FiltersProvider>().InSingletonScope();
 		}
 	}
 }

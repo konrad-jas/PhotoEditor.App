@@ -25,7 +25,7 @@ namespace PhotoEditor.Utility
 		{
 			App.Container.Load(new List<NinjectModule>
 			{
-				new StubServicesModule(),
+				new ServicesModule(),
 				new ViewModelsModule()
 			});
 		}

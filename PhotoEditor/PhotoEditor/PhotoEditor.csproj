@@ -38,16 +38,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\InvertedBoolConverter.cs" />
+    <Compile Include="Services\FiltersProvider.cs" />
+    <Compile Include="Services\Interfaces\IFiltersProvider.cs" />
     <Compile Include="Services\Interfaces\IPopupInflater.cs" />
     <Compile Include="Utility\Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IImageProvider.cs" />
     <Compile Include="Services\Stubs\ImageProviderStub.cs" />
+    <Compile Include="Utility\FilterType.cs" />
     <Compile Include="Utility\ServicesModule.cs" />
     <Compile Include="Utility\StubServicesModule.cs" />
     <Compile Include="Utility\ViewModelsModule.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\FilterNO.cs" />
     <Compile Include="ViewModels\FlowBuilderViewModel.cs" />
+    <Compile Include="ViewModels\NotificationObject.cs" />
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\FlowBuilderPage.xaml.cs">
       <DependentUpon>FlowBuilderPage.xaml</DependentUpon>

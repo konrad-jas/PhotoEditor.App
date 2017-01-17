@@ -14,5 +14,10 @@ namespace PhotoEditor.Views
         {
             InitializeComponent();
         }
+
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ListView.SelectedItem = null;
+        }
     }
 }

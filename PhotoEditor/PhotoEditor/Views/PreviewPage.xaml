@@ -1,14 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:PhotoEditor.Converters;assembly=PhotoEditor"
              x:Class="PhotoEditor.Views.PreviewPage">
-  <ScrollView>
-  <StackLayout>
-	  <Image Source="{Binding ImageSource}" Aspect="AspectFill" HeightRequest="200" BackgroundColor="Blue">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="200"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Button BorderColor="Blue" BorderWidth="10" 
+        Text="Tap to select image" TextColor="Black"
+        Grid.Row="0"
+        Command="{Binding ChooseImageCommand}"
+        IsVisible="{Binding ImageChosen, Converter={StaticResource InvertedBoolConverter}}"/>
+      <Image Source="{Binding ImageSource}"
+          Aspect="AspectFill"
+          Grid.Row="0"
+          IsVisible="{Binding ImageChosen}">
         <Image.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding ChooseImageCommand}"></TapGestureRecognizer>
         </Image.GestureRecognizers>>
       </Image>
-  </StackLayout>
-  </ScrollView>
+      <ListView x:Name="ListView" Grid.Row="1" ItemsSource="{Binding Filters}" ItemSelected="OnItemSelected">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <TextCell Text ="{Binding Name}" Command="{Binding FilterCommand}" CommandParameter="{Binding Type}"/>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </Grid>
 </ContentPage>
