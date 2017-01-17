@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:PhotoEditor.Converters;assembly=PhotoEditor"
+             x:Class="PhotoEditor.Views.ParameterPickerPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:IntToStringConverter x:Key="IntToStringConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ListView x:Name="ListView" ItemsSource="{Binding FilterOptions}" ItemSelected="ListView_OnItemSelected">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <EntryCell Text="{Binding Value, Converter={StaticResource IntToStringConverter}" Label="{Binding Name}"></EntryCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+</ContentPage>

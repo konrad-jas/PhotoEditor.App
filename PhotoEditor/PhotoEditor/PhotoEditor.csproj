@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\InvertedBoolConverter.cs" />
     <Compile Include="Services\FiltersProvider.cs" />
     <Compile Include="Services\Interfaces\IFiltersProvider.cs" />
@@ -52,11 +53,16 @@
     <Compile Include="Utility\ViewModelsModule.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FilterNO.cs" />
+    <Compile Include="ViewModels\FilterOption.cs" />
     <Compile Include="ViewModels\FlowBuilderViewModel.cs" />
     <Compile Include="ViewModels\NotificationObject.cs" />
+    <Compile Include="ViewModels\ParamsPickerViewModel.cs" />
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\FlowBuilderPage.xaml.cs">
       <DependentUpon>FlowBuilderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterPickerPage.xaml.cs">
+      <DependentUpon>ParameterPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PreviewPage.xaml.cs">
       <DependentUpon>PreviewPage.xaml</DependentUpon>
@@ -129,7 +135,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ParameterPickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

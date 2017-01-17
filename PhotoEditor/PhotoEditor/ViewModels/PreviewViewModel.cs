@@ -14,12 +14,14 @@ namespace PhotoEditor.ViewModels
 	{
 	    private readonly IMediaPicker _mediaPicker;
 	    private readonly IFiltersProvider _filtersProvider;
+	    private readonly IPopupInflater _popupInflater;
 	    private string _imagePath;
 
-	    public PreviewViewModel(IMediaPicker mediaPicker, IFiltersProvider filtersProvider)
+	    public PreviewViewModel(IMediaPicker mediaPicker, IFiltersProvider filtersProvider, IPopupInflater popupInflater)
 		{
 	        _mediaPicker = mediaPicker;
 	        _filtersProvider = filtersProvider;
+	        _popupInflater = popupInflater;
 	        ChooseImageCommand = new Command(ChooseImageAction);
             FilterCommand = new Command<FilterType>(FilterAction);
 	        var filters = _filtersProvider.GetFilters().ToList();
@@ -30,8 +32,9 @@ namespace PhotoEditor.ViewModels
 	        Filters = filters;
 		}
 
-	    private void FilterAction(FilterType obj)
+	    private async void FilterAction(FilterType obj)
 	    {
+	        await _popupInflater.ShowParamsPicker(obj);
 	    }
 
 	    public Command<FilterType> FilterCommand { get; set; }
