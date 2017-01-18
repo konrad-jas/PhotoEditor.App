@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://ImageFilter/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ImageFilterService" targetNamespace="http://ImageFilter/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://wikiws.os.niwa.gda.pl/gf/10062/V9Working/ImageFilterService?xsd=1" namespace="http://ImageFilter/" />
+    </xsd:schema>
+  </types>
+  <message name="hello">
+    <part name="parameters" element="tns:hello" />
+  </message>
+  <message name="helloResponse">
+    <part name="parameters" element="tns:helloResponse" />
+  </message>
+  <message name="gaussFilter">
+    <part name="parameters" element="tns:gaussFilter" />
+  </message>
+  <message name="gaussFilterResponse">
+    <part name="parameters" element="tns:gaussFilterResponse" />
+  </message>
+  <message name="MakeBorder">
+    <part name="parameters" element="tns:MakeBorder" />
+  </message>
+  <message name="MakeBorderResponse">
+    <part name="parameters" element="tns:MakeBorderResponse" />
+  </message>
+  <message name="Sharpen">
+    <part name="parameters" element="tns:Sharpen" />
+  </message>
+  <message name="SharpenResponse">
+    <part name="parameters" element="tns:SharpenResponse" />
+  </message>
+  <message name="ChangeBrightness">
+    <part name="parameters" element="tns:ChangeBrightness" />
+  </message>
+  <message name="ChangeBrightnessResponse">
+    <part name="parameters" element="tns:ChangeBrightnessResponse" />
+  </message>
+  <message name="Treshold">
+    <part name="parameters" element="tns:Treshold" />
+  </message>
+  <message name="TresholdResponse">
+    <part name="parameters" element="tns:TresholdResponse" />
+  </message>
+  <message name="Dilate">
+    <part name="parameters" element="tns:Dilate" />
+  </message>
+  <message name="DilateResponse">
+    <part name="parameters" element="tns:DilateResponse" />
+  </message>
+  <message name="Erode">
+    <part name="parameters" element="tns:Erode" />
+  </message>
+  <message name="ErodeResponse">
+    <part name="parameters" element="tns:ErodeResponse" />
+  </message>
+  <message name="GrayScaleConversion">
+    <part name="parameters" element="tns:GrayScaleConversion" />
+  </message>
+  <message name="GrayScaleConversionResponse">
+    <part name="parameters" element="tns:GrayScaleConversionResponse" />
+  </message>
+  <message name="CombineFilters">
+    <part name="parameters" element="tns:CombineFilters" />
+  </message>
+  <message name="CombineFiltersResponse">
+    <part name="parameters" element="tns:CombineFiltersResponse" />
+  </message>
+  <message name="Flip">
+    <part name="parameters" element="tns:Flip" />
+  </message>
+  <message name="FlipResponse">
+    <part name="parameters" element="tns:FlipResponse" />
+  </message>
+  <portType name="ImageFilterService">
+    <operation name="hello">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/helloRequest" message="tns:hello" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/helloResponse" message="tns:helloResponse" />
+    </operation>
+    <operation name="gaussFilter">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/gaussFilterRequest" message="tns:gaussFilter" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/gaussFilterResponse" message="tns:gaussFilterResponse" />
+    </operation>
+    <operation name="MakeBorder">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/MakeBorderRequest" message="tns:MakeBorder" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/MakeBorderResponse" message="tns:MakeBorderResponse" />
+    </operation>
+    <operation name="Sharpen">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/SharpenRequest" message="tns:Sharpen" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/SharpenResponse" message="tns:SharpenResponse" />
+    </operation>
+    <operation name="ChangeBrightness">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/ChangeBrightnessRequest" message="tns:ChangeBrightness" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/ChangeBrightnessResponse" message="tns:ChangeBrightnessResponse" />
+    </operation>
+    <operation name="Treshold">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/TresholdRequest" message="tns:Treshold" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/TresholdResponse" message="tns:TresholdResponse" />
+    </operation>
+    <operation name="Dilate">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/DilateRequest" message="tns:Dilate" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/DilateResponse" message="tns:DilateResponse" />
+    </operation>
+    <operation name="Erode">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/ErodeRequest" message="tns:Erode" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/ErodeResponse" message="tns:ErodeResponse" />
+    </operation>
+    <operation name="GrayScaleConversion">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/GrayScaleConversionRequest" message="tns:GrayScaleConversion" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/GrayScaleConversionResponse" message="tns:GrayScaleConversionResponse" />
+    </operation>
+    <operation name="CombineFilters">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/CombineFiltersRequest" message="tns:CombineFilters" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/CombineFiltersResponse" message="tns:CombineFiltersResponse" />
+    </operation>
+    <operation name="Flip">
+      <input wsam:Action="http://ImageFilter/ImageFilterService/FlipRequest" message="tns:Flip" />
+      <output wsam:Action="http://ImageFilter/ImageFilterService/FlipResponse" message="tns:FlipResponse" />
+    </operation>
+  </portType>
+  <binding name="ImageFilterServicePortBinding" type="tns:ImageFilterService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="hello">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="gaussFilter">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="MakeBorder">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Sharpen">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ChangeBrightness">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Treshold">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Dilate">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Erode">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GrayScaleConversion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="CombineFilters">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="Flip">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ImageFilterService">
+    <port name="ImageFilterServicePort" binding="tns:ImageFilterServicePortBinding">
+      <soap:address location="http://wikiws.os.niwa.gda.pl/gf/10062/V9Working/ImageFilterService" />
+    </port>
+  </service>
+</definitions>

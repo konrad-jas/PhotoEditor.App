@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:converters="clr-namespace:PhotoEditor.Converters;assembly=PhotoEditor"
+                   x:Class="PhotoEditor.Views.BusyIndicator">
+  <AbsoluteLayout.Resources>
+    <ResourceDictionary>
+      <converters:InvertedBoolConverter x:Key="Converter"></converters:InvertedBoolConverter>
+    </ResourceDictionary>
+  </AbsoluteLayout.Resources>
+  <ActivityIndicator IsRunning="{Binding Busy}"
+    AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="SizeProportional">
+  </ActivityIndicator>
+  <AbsoluteLayout.Triggers>
+    <DataTrigger TargetType="AbsoluteLayout" Binding="{Binding Busy}" Value="False">
+      <Setter Property="HeightRequest" Value="0"></Setter>
+    </DataTrigger>
+    <DataTrigger TargetType="AbsoluteLayout" Binding="{Binding Busy}" Value="True">
+      <Setter Property="HeightRequest" Value="50"></Setter>
+    </DataTrigger>
+  </AbsoluteLayout.Triggers>
+  </AbsoluteLayout>
