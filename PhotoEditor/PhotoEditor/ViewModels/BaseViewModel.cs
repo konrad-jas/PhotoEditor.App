@@ -16,8 +16,18 @@ namespace PhotoEditor.ViewModels
 	        PopupInflater = popupInflater;
 	    }
 
-	    public bool Busy { get; private set; }
-		private readonly ManualResetEvent _resetEvent = new ManualResetEvent(true);
+	    public bool Busy
+	    {
+	        get { return _busy; }
+	        private set
+	        {
+	            _busy = value;
+	            RaisePropertyChanged(() => Busy);
+	        }
+	    }
+
+	    private readonly AutoResetEvent _resetEvent = new AutoResetEvent(true);
+	    private bool _busy;
 
 	    public virtual void Init(object args)
 	    {

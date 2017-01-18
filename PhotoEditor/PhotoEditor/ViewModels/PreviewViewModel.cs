@@ -32,12 +32,15 @@ namespace PhotoEditor.ViewModels
 
 	    private async void FilterAction(FilterType obj)
 	    {
-	        //if (ImageChosen == false)
-	        //{
-	        //    await _popupInflater.InflatePopup("Error", "Please choose image first", "Ok");
-	        //    return;
-	        //}
-	        if (_filtersProvider.GetFilterOptions(obj).Any())
+            if (ImageChosen == false)
+            {
+                await PopupInflater.InflatePopup("Error", "Please choose image first", "Ok");
+                return;
+            }
+            if(Busy)
+                return;
+
+            if (_filtersProvider.GetFilterOptions(obj).Any())
 	        {
 	            MessagingCenter.Subscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process",
 	                (model, options) =>
@@ -76,6 +79,9 @@ namespace PhotoEditor.ViewModels
 
 	    private async void ChooseImageAction()
 	    {
+            if(Busy)
+                return;
+
 	        var imageStream = await _imageProvider.GetImage();
             if(imageStream == null)
                 return;

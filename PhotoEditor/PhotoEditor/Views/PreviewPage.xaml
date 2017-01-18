@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:PhotoEditor.Converters;assembly=PhotoEditor"
+             xmlns:views="clr-namespace:PhotoEditor.Views;assembly=PhotoEditor"
              x:Class="PhotoEditor.Views.PreviewPage">
   <ContentPage.Resources>
     <ResourceDictionary>
@@ -10,23 +11,25 @@
   </ContentPage.Resources>
     <Grid>
       <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
         <RowDefinition Height="200"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
       </Grid.RowDefinitions>
+      <views:BusyIndicator/>
       <Button BorderColor="Blue" BorderWidth="10" 
         Text="Tap to select image"
-        Grid.Row="0"
+        Grid.Row="1"
         Command="{Binding ChooseImageCommand}"
         IsVisible="{Binding ImageChosen, Converter={StaticResource InvertedBoolConverter}}"/>
       <Image Source="{Binding ImageSource}"
           Aspect="AspectFill"
-          Grid.Row="0"
+          Grid.Row="1"
           IsVisible="{Binding ImageChosen}">
         <Image.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding ChooseImageCommand}"></TapGestureRecognizer>
         </Image.GestureRecognizers>>
       </Image>
-      <ListView x:Name="ListView" Grid.Row="1" ItemsSource="{Binding Filters}" ItemSelected="OnItemSelected">
+      <ListView x:Name="ListView" Grid.Row="2" ItemsSource="{Binding Filters}" ItemSelected="OnItemSelected">
         <ListView.ItemTemplate>
           <DataTemplate>
             <TextCell Text ="{Binding Name}" Command="{Binding FilterCommand}" CommandParameter="{Binding Type}"/>
