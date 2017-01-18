@@ -41,6 +41,7 @@
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\InvertedBoolConverter.cs" />
     <Compile Include="Services\AsyncServiceBase.cs" />
+    <Compile Include="Services\CompositeFilterBuilder.cs" />
     <Compile Include="Services\FilterExecutor.cs" />
     <Compile Include="Services\FiltersProvider.cs" />
     <Compile Include="Services\FilterExecutorFactory.cs" />
