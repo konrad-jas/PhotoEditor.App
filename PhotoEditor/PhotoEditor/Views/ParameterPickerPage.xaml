@@ -20,7 +20,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <EntryCell Text="{Binding Value, Converter={StaticResource IntToStringConverter}, Mode=TwoWay}"
-            Label="{Binding Name}"/>
+            Label="{Binding Name}" Keyboard="Keyboard.Numeric"/>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>

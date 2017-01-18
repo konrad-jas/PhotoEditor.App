@@ -23,7 +23,7 @@ namespace PhotoEditor.Services
                 {FilterType.GrayScale, new string[0] },
                 {FilterType.MakeBorder, new [] { "Top","Left", "Bottom", "Right" }},
                 {FilterType.Sharpen, new string[0] },
-                {FilterType.Threshold, new [] { "Treshold", "MaxVal" }}
+                {FilterType.Threshold, new [] { "Threshold", "MaxVal" }}
             };
         }
 
