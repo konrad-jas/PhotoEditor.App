@@ -132,8 +132,8 @@ namespace PhotoEditor.ViewModels
 
 	    private void CleanupSubscription()
 	    {
-            MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
-            MessagingCenter.Unsubscribe<FilterPickerViewModel>(this, "FilterPicked");
+            MessagingCenter.Unsubscribe<FilterPickerViewModel, FilterNO>(this, "FilterPicked");
+            MessagingCenter.Unsubscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process");
         }
     }
 }

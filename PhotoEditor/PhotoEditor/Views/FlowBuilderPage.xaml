@@ -38,7 +38,7 @@
     <ListView x:Name="ListView" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
        ItemsSource="{Binding SelectedFilters}" ItemSelected="OnItemSelected">
        <ListView.Header>
-        <Button Text="Add filter" Command="AddFilterCommand"></Button>
+        <Button Text="Add filter" Command="{Binding AddFilterCommand}"></Button>
        </ListView.Header>
       <ListView.ItemTemplate>
         <DataTemplate>

@@ -10,18 +10,18 @@ namespace PhotoEditor.ViewModels
         public FilterPickerViewModel(INavigator navigator, IFiltersProvider filtersProvider) : base(navigator)
         {
             Filters = filtersProvider.GetFilters().ToList();
+            FilterSelectedCommand = new Command<FilterNO>(FilterSelectedAction);
             foreach (var filter in Filters)
             {
                 filter.FilterCommand = FilterSelectedCommand;
             }
-            FilterSelectedCommand = new Command<FilterNO>(FilterSelectedAction);
         }
 
         public Command<FilterNO> FilterSelectedCommand { get; set; }
 
         private async void FilterSelectedAction(FilterNO obj)
         {
-            MessagingCenter.Send(this, "FilterSelected", obj);
+            MessagingCenter.Send(this, "FilterPicked", obj);
             await Navigator.GoBack();
         }
 
