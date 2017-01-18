@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ImageFilter/" targetNamespace="http://ImageFilter/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ChangeBrightness" type="tns:ChangeBrightness" />
+  <xs:element name="ChangeBrightnessResponse" type="tns:ChangeBrightnessResponse" />
+  <xs:element name="CombineFilters" type="tns:CombineFilters" />
+  <xs:element name="CombineFiltersResponse" type="tns:CombineFiltersResponse" />
+  <xs:element name="Dilate" type="tns:Dilate" />
+  <xs:element name="DilateResponse" type="tns:DilateResponse" />
+  <xs:element name="Erode" type="tns:Erode" />
+  <xs:element name="ErodeResponse" type="tns:ErodeResponse" />
+  <xs:element name="Flip" type="tns:Flip" />
+  <xs:element name="FlipResponse" type="tns:FlipResponse" />
+  <xs:element name="GrayScaleConversion" type="tns:GrayScaleConversion" />
+  <xs:element name="GrayScaleConversionResponse" type="tns:GrayScaleConversionResponse" />
+  <xs:element name="MakeBorder" type="tns:MakeBorder" />
+  <xs:element name="MakeBorderResponse" type="tns:MakeBorderResponse" />
+  <xs:element name="Sharpen" type="tns:Sharpen" />
+  <xs:element name="SharpenResponse" type="tns:SharpenResponse" />
+  <xs:element name="Treshold" type="tns:Treshold" />
+  <xs:element name="TresholdResponse" type="tns:TresholdResponse" />
+  <xs:element name="gaussFilter" type="tns:gaussFilter" />
+  <xs:element name="gaussFilterResponse" type="tns:gaussFilterResponse" />
+  <xs:element name="hello" type="tns:hello" />
+  <xs:element name="helloResponse" type="tns:helloResponse" />
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeBrightness">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="alpha" type="xs:int" />
+      <xs:element name="beta" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeBrightnessResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Flip">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="flipCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FlipResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gaussFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="value" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gaussFilterResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Sharpen">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharpenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MakeBorder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="top" type="xs:int" />
+      <xs:element name="left" type="xs:int" />
+      <xs:element name="bottom" type="xs:int" />
+      <xs:element name="right" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MakeBorderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Erode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="size" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErodeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CombineFilters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element minOccurs="0" name="filtersXml" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CombineFiltersResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Dilate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="size" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DilateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GrayScaleConversion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GrayScaleConversionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Treshold">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="image" type="xs:string" />
+      <xs:element name="treshold" type="xs:int" />
+      <xs:element name="maxval" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TresholdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
