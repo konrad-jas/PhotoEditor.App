@@ -19,8 +19,9 @@ namespace PhotoEditor
             InitializeComponent();
 	        Container = container;
 			var rootPage = new RootPage();
+            var navigationPage = new NavigationPage(rootPage);
 	        Bootstrapper._initialize(rootPage);
-	        MainPage = rootPage;
+	        MainPage = navigationPage;
         }
 
         protected override void OnStart()
