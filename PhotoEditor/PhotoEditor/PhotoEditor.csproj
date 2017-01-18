@@ -57,6 +57,7 @@
     <Compile Include="Utility\FilterType.cs" />
     <Compile Include="Utility\ServicesModule.cs" />
     <Compile Include="Utility\ViewModelsModule.cs" />
+    <Compile Include="ViewModels\FilterPickerViewModel.cs" />
     <Compile Include="ViewModels\IBackable.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FilterNO.cs" />
@@ -68,6 +69,9 @@
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\BusyIndicator.xaml.cs">
       <DependentUpon>BusyIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilterPickerPage.xaml.cs">
+      <DependentUpon>FilterPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FlowBuilderPage.xaml.cs">
       <DependentUpon>FlowBuilderPage.xaml</DependentUpon>
@@ -169,6 +173,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BusyIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FilterPickerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

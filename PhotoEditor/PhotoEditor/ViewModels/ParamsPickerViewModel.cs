@@ -18,8 +18,8 @@ namespace PhotoEditor.ViewModels
 
         private async void ConfirmAction()
         {
-            await Navigator.GoBack();
             MessagingCenter.Send(this, "Process", FilterOptions);
+            await Navigator.GoBack();
         }
 
         public override void Init(object args)

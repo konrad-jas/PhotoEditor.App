@@ -35,18 +35,21 @@ namespace PhotoEditor.Views
             await DisplayAlert(title, message, confirmation);
         }
 
-        public async Task ShowViewModel<TViewModel>(object args) where TViewModel : BaseViewModel
+        public async Task ShowViewModel<TViewModel>(object args = null) where TViewModel : BaseViewModel
         {
             var page = (ContentPage)App.Container.Get(_viewsDictionary[typeof (TViewModel)]);
             var vm = App.Container.Get<TViewModel>();
-            vm.Init(args);
+            if(args != null)
+                vm.Init(args);
+
             page.BindingContext = vm;
             await Navigation.PushAsync(page, true);
         }
 
         private readonly Dictionary<Type, Type> _viewsDictionary = new Dictionary<Type, Type>
         {
-            {typeof(ParamsPickerViewModel), typeof(ParamsPickerViewModel)}
+            {typeof(ParamsPickerViewModel), typeof(ParameterPickerPage)},
+            {typeof(FilterPickerViewModel), typeof(FilterPickerPage) }
         }; 
 
         public async Task GoBack()

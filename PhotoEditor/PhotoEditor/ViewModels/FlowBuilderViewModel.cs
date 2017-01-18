@@ -91,20 +91,26 @@ namespace PhotoEditor.ViewModels
 	    public ObservableCollection<ParametrizedFilter> SelectedFilters { get; set; }
 
 	    public Command AddFilterCommand { get; set; }
-	    private void AddFilterAction()
+	    private async void AddFilterAction()
 	    {
-	        //var parametrized = new ParametrizedFilter
-	        //{
-	        //    Name = filter.Name,
-	        //    FilterType = filter.Type,
-	        //    Options = _filtersProvider.GetFilterOptions(filter.Type),
-         //       Command = SelectParametersCommand,
-         //       RemoveCommand = RemoveFilterCommand
-	        //};
-            //SelectedFilters.Add(parametrized);
+            MessagingCenter.Subscribe<FilterPickerViewModel, FilterNO>(this, "FilterPicked", FilterPicked);
+	        await Navigator.ShowViewModel<FilterPickerViewModel>();
+        }
+
+	    private void FilterPicked(FilterPickerViewModel filterPickerViewModel, FilterNO filterNo)
+	    {
+	        CleanupSubscription();
+            SelectedFilters.Add(new ParametrizedFilter
+            {
+                Command = SelectParametersCommand,
+                FilterType = filterNo.Type,
+                Name = filterNo.Name,
+                RemoveCommand = RemoveFilterCommand,
+                Options = _filtersProvider.GetFilterOptions(filterNo.Type)
+            });
 	    }
 
-        private async Task SetImageSource(Stream imageStream)
+	    private async Task SetImageSource(Stream imageStream)
         {
             _selectedImage?.Dispose();
             _selectedImage = new MemoryStream();
@@ -127,6 +133,7 @@ namespace PhotoEditor.ViewModels
 	    private void CleanupSubscription()
 	    {
             MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
+            MessagingCenter.Unsubscribe<FilterPickerViewModel>(this, "FilterPicked");
         }
     }
 }
