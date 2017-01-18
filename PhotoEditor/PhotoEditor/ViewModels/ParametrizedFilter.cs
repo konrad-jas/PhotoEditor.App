@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using PhotoEditor.Utility;
+using Xamarin.Forms;
 
 namespace PhotoEditor.ViewModels
 {
@@ -10,5 +11,6 @@ namespace PhotoEditor.ViewModels
         public FilterType FilterType { get; set; }
         public IEnumerable<FilterOption> Options { get; set; } 
         public ICommand Command { get; set; }
+        public ICommand RemoveCommand { get; set; }
     }
 }

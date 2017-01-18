@@ -98,7 +98,8 @@ namespace PhotoEditor.ViewModels
 	            Name = filter.Name,
 	            FilterType = filter.Type,
 	            Options = _filtersProvider.GetFilterOptions(filter.Type),
-                Command = RemoveFilterCommand
+                Command = SelectParametersCommand,
+                RemoveCommand = RemoveFilterCommand
 	        };
             SelectedFilters.Add(parametrized);
 	    }

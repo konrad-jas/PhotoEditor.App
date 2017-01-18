@@ -10,8 +10,8 @@
   </ContentPage.Resources>
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition Height="9*"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="50"></RowDefinition>
     </Grid.RowDefinitions>
     <ListView x:Name="ListView" ItemsSource="{Binding FilterOptions}" ItemSelected="ListView_OnItemSelected">
       <ListView.Header>
