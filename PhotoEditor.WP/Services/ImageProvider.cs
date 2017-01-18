@@ -17,6 +17,11 @@ namespace PhotoEditor.WP.Services
             var chooser = new PhotoChooserTask {ShowCamera = false};
             chooser.Completed += async (sender, result) =>
             {
+                if (result.ChosenPhoto == null)
+                {
+                    completionSource.SetResult(null);
+                    return;
+                }
                 var memoryStream = new MemoryStream();
                 await result.ChosenPhoto.CopyToAsync(memoryStream);
                 result.ChosenPhoto.Dispose();

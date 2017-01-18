@@ -11,7 +11,7 @@
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="*"></RowDefinition>
-      <RowDefinition Height="50"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
     <ListView x:Name="ListView" ItemsSource="{Binding FilterOptions}" ItemSelected="ListView_OnItemSelected">
       <ListView.Header>
