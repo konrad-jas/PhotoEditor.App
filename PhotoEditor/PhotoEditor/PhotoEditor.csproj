@@ -41,7 +41,12 @@
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\InvertedBoolConverter.cs" />
     <Compile Include="Services\AsyncServiceBase.cs" />
+    <Compile Include="Services\FilterExecutor.cs" />
     <Compile Include="Services\FiltersProvider.cs" />
+    <Compile Include="Services\FilterExecutorFactory.cs" />
+    <Compile Include="Services\Interfaces\IConfiguredFilterExecutor.cs" />
+    <Compile Include="Services\Interfaces\IFilterExecutor.cs" />
+    <Compile Include="Services\Interfaces\IFilterExecutorFactory.cs" />
     <Compile Include="Services\Interfaces\IFiltersProvider.cs" />
     <Compile Include="Services\Interfaces\IPopupInflater.cs" />
     <Compile Include="Services\Interfaces\ISoapServiceClient.cs" />

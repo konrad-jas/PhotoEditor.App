@@ -9,6 +9,8 @@ namespace PhotoEditor.Utility
 		public override void Load()
 		{
 		    Bind<IFiltersProvider>().To<FiltersProvider>().InSingletonScope();
+		    Bind<ISoapServiceClient>().To<SoapServiceClient>().InSingletonScope();
+		    Bind<IFilterExecutorFactory>().To<FilterExecutorFactory>().InSingletonScope();
 		}
 	}
 }
