@@ -13,8 +13,8 @@ namespace PhotoEditor.Services.Interfaces
         Task<string> MakeBorder(string image, int top, int left, int bottom, int right);
         Task<string> Sharpen(string image);
         Task<string> Threshold(string image, int threshold, int maxVal);
-        Task<string> CompositeFilter(string image, string filter)
+	    Task<string> CompositeFilter(string image, string filter);
 
 
-    }
+	}
 }

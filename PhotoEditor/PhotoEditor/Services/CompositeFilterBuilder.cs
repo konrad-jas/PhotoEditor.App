@@ -21,11 +21,6 @@ namespace PhotoEditor.Services
             {FilterType.GrayScale, "GrayScaleConversion" }
         };
 
-        private static readonly Dictionary<string, string> _filterOptions = new Dictionary<string, string>
-        {
-            
-        } 
-
         public static string Build(IEnumerable<ParametrizedFilter> filters)
         {
             var stringBuilder = new StringBuilder().Append("<filters>");
