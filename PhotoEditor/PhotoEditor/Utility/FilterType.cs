@@ -10,6 +10,7 @@
         Threshold,
         Dilate,
         Erode,
-        GrayScale
+        GrayScale,
+        Combined
     }
 }

@@ -9,7 +9,7 @@ namespace PhotoEditor.Services
 {
     public class FiltersProvider : IFiltersProvider
     {
-        private Dictionary<FilterType, IEnumerable<string>> _filtersOptions;
+        private readonly Dictionary<FilterType, IEnumerable<string>> _filtersOptions;
 
         public FiltersProvider()
         {

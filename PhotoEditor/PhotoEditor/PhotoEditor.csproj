@@ -62,6 +62,7 @@
     <Compile Include="ViewModels\FilterOption.cs" />
     <Compile Include="ViewModels\FlowBuilderViewModel.cs" />
     <Compile Include="ViewModels\NotificationObject.cs" />
+    <Compile Include="ViewModels\ParametrizedFilter.cs" />
     <Compile Include="ViewModels\ParamsPickerViewModel.cs" />
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\BusyIndicator.xaml.cs">
