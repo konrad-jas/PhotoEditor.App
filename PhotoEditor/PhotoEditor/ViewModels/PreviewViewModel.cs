@@ -12,15 +12,13 @@ namespace PhotoEditor.ViewModels
 	{
 	    private readonly IImageProvider _imageProvider;
 	    private readonly IFiltersProvider _filtersProvider;
-	    private readonly IPopupInflater _popupInflater;
 	    private readonly IFilterExecutorFactory _executorFactory;
 	    private MemoryStream _selectedImage;
 
-	    public PreviewViewModel(IImageProvider imageProvider, IFiltersProvider filtersProvider, IPopupInflater popupInflater, IFilterExecutorFactory executorFactory)
+	    public PreviewViewModel(IImageProvider imageProvider, IFiltersProvider filtersProvider, IFilterExecutorFactory executorFactory, IPopupInflater inflater) : base(inflater)
 		{
 	        _imageProvider = imageProvider;
 	        _filtersProvider = filtersProvider;
-	        _popupInflater = popupInflater;
 	        _executorFactory = executorFactory;
 	        ChooseImageCommand = new Command(ChooseImageAction);
             FilterCommand = new Command<FilterType>(FilterAction);
@@ -46,7 +44,7 @@ namespace PhotoEditor.ViewModels
 	                {
 	                    ProcessFilter(obj, options);
 	                });
-	            await _popupInflater.ShowParamsPicker(obj);
+	            await PopupInflater.ShowParamsPicker(obj);
 	        }
 	        else
 	            ProcessFilter(obj, Enumerable.Empty<FilterOption>());

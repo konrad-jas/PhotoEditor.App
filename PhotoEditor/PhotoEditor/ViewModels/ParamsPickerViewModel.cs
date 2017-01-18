@@ -8,19 +8,17 @@ namespace PhotoEditor.ViewModels
     public class ParamsPickerViewModel : BaseViewModel
     {
         private readonly IFiltersProvider _filtersProvider;
-        private readonly IPopupInflater _popupInflater;
         private FilterType _filterType;
 
-        public ParamsPickerViewModel(IFiltersProvider filtersProvider, IPopupInflater popupInflater)
+        public ParamsPickerViewModel(IFiltersProvider filtersProvider, IPopupInflater popupInflater) : base(popupInflater)
         {
             _filtersProvider = filtersProvider;
-            _popupInflater = popupInflater;
             ConfirmCommand = new Command(ConfirmAction);
         }
 
         private async void ConfirmAction()
         {
-            await _popupInflater.ClosePopup();
+            await PopupInflater.ClosePopup();
             MessagingCenter.Send(this, "Process", FilterOptions);
         }
 
