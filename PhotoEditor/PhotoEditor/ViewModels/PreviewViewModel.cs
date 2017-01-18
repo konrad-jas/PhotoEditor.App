@@ -66,10 +66,15 @@ namespace PhotoEditor.ViewModels
 
 	    private async void ChooseImageAction()
 	    {
-	        var media = await _imageProvider.GetImage();
+	        var imageStream = await _imageProvider.GetImage();
+            if(imageStream == null)
+                return;
+
 	        _selectedImage?.Dispose();
-	        _selectedImage = media;
-	        ImageSource = ImageSource.FromStream(() => media);
+            _selectedImage = new MemoryStream();
+	        await imageStream.CopyToAsync(_selectedImage);
+	        _selectedImage.Position = 0;
+	        ImageSource = ImageSource.FromStream(() => imageStream);
 	        RaisePropertyChanged(() => ImageSource);
 	        RaisePropertyChanged(() => ImageChosen);
 	        FilterCommand.ChangeCanExecute();
