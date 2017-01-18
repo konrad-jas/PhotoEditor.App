@@ -1,12 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Ninject;
 using PhotoEditor.Services.Interfaces;
 using PhotoEditor.Utility;
 using PhotoEditor.ViewModels;
+using Xamarin.Forms;
 
 namespace PhotoEditor.Views
 {
-    public partial class RootPage : IPopupInflater
+    public partial class RootPage : INavigator
     {
         public RootPage()
         {
@@ -19,23 +23,37 @@ namespace PhotoEditor.Views
 		    FlowBuilderPage.BindingContext = flowBuilderViewModel;
 	    }
 
+        protected override bool OnBackButtonPressed()
+        {
+            var backable = CurrentPage.BindingContext as IBackable;
+            backable?.OnBack();
+            return base.OnBackButtonPressed();
+        }
+
         public async Task InflatePopup(string title, string message, string confirmation)
         {
             await DisplayAlert(title, message, confirmation);
         }
 
-        public async Task ShowParamsPicker(FilterType filter)
+        public async Task ShowViewModel<TViewModel>(object args) where TViewModel : BaseViewModel
         {
-            var page = new ParameterPickerPage();
-            var vm = App.Container.Get<ParamsPickerViewModel>();
-            vm.Init(filter);
+            var page = (ContentPage)App.Container.Get(_viewsDictionary[typeof (TViewModel)]);
+            var vm = App.Container.Get<TViewModel>();
+            vm.Init(args);
             page.BindingContext = vm;
-            await Navigation.PushModalAsync(page, true);
+            await Navigation.PushAsync(page, true);
         }
 
-        public async Task ClosePopup()
+        private readonly Dictionary<Type, Type> _viewsDictionary = new Dictionary<Type, Type>
         {
-            await Navigation.PopModalAsync(true);
+            {typeof(ParamsPickerViewModel), typeof(ParamsPickerViewModel)}
+        }; 
+
+        public async Task GoBack()
+        {
+            await Navigation.PopAsync(true);
+            var backable = Navigation.NavigationStack.Last().BindingContext as IBackable;
+            backable?.OnBack();
         }
     }
 }

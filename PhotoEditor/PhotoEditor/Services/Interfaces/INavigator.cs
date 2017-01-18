@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
-using PhotoEditor.Utility;
+using PhotoEditor.ViewModels;
 
 namespace PhotoEditor.Services.Interfaces
 {
-    public interface IPopupInflater
+    public interface INavigator
     {
         Task InflatePopup(string title, string message, string confirmation);
-        Task ShowParamsPicker(FilterType filter);
-        Task ClosePopup();
+        Task ShowViewModel<TViewModel>(object args) where TViewModel : BaseViewModel;
+        Task GoBack();
     }
 }

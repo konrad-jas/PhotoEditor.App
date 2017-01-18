@@ -10,10 +10,10 @@ namespace PhotoEditor.ViewModels
 {
 	public abstract class BaseViewModel : NotificationObject
 	{
-	    protected readonly IPopupInflater PopupInflater;
-	    protected BaseViewModel(IPopupInflater popupInflater)
+	    protected readonly INavigator Navigator;
+	    protected BaseViewModel(INavigator navigator)
 	    {
-	        PopupInflater = popupInflater;
+	        Navigator = navigator;
 	    }
 
 	    public bool Busy
@@ -48,7 +48,7 @@ namespace PhotoEditor.ViewModels
 		        var printedException = ex.InnerException ?? ex;
 		        Debug.WriteLine(printedException.ToString());
 		        await
-		            PopupInflater.InflatePopup("Oops", "Something went wrong, please check your connection and try again",
+		            Navigator.InflatePopup("Oops", "Something went wrong, please check your connection and try again",
 		                "Ok");
 		    }
 

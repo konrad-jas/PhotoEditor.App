@@ -17,7 +17,7 @@ namespace PhotoEditor.Utility
 		public static void _initialize(RootPage mainPage)
 		{
 			LoadDependencies();
-		    App.Container.Bind<IPopupInflater>().ToConstant(mainPage);
+		    App.Container.Bind<INavigator>().ToConstant(mainPage);
 			mainPage.Init(App.Container.Get<PreviewViewModel>(), App.Container.Get<FlowBuilderViewModel>());
 		}
 

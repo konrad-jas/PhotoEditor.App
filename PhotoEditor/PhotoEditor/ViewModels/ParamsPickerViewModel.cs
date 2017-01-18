@@ -10,7 +10,7 @@ namespace PhotoEditor.ViewModels
         private readonly IFiltersProvider _filtersProvider;
         private FilterType _filterType;
 
-        public ParamsPickerViewModel(IFiltersProvider filtersProvider, IPopupInflater popupInflater) : base(popupInflater)
+        public ParamsPickerViewModel(IFiltersProvider filtersProvider, INavigator navigator) : base(navigator)
         {
             _filtersProvider = filtersProvider;
             ConfirmCommand = new Command(ConfirmAction);
@@ -18,7 +18,7 @@ namespace PhotoEditor.ViewModels
 
         private async void ConfirmAction()
         {
-            await PopupInflater.ClosePopup();
+            await Navigator.GoBack();
             MessagingCenter.Send(this, "Process", FilterOptions);
         }
 

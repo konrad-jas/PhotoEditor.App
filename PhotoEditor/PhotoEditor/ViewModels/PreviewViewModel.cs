@@ -8,14 +8,14 @@ using Xamarin.Forms;
 
 namespace PhotoEditor.ViewModels
 {
-	public class PreviewViewModel : BaseViewModel
+	public class PreviewViewModel : BaseViewModel, IBackable
 	{
 	    private readonly IImageProvider _imageProvider;
 	    private readonly IFiltersProvider _filtersProvider;
 	    private readonly IFilterExecutorFactory _executorFactory;
 	    private MemoryStream _selectedImage;
 
-	    public PreviewViewModel(IImageProvider imageProvider, IFiltersProvider filtersProvider, IFilterExecutorFactory executorFactory, IPopupInflater inflater) : base(inflater)
+	    public PreviewViewModel(IImageProvider imageProvider, IFiltersProvider filtersProvider, IFilterExecutorFactory executorFactory, INavigator inflater) : base(inflater)
 		{
 	        _imageProvider = imageProvider;
 	        _filtersProvider = filtersProvider;
@@ -34,7 +34,7 @@ namespace PhotoEditor.ViewModels
 	    {
             if (ImageChosen == false)
             {
-                await PopupInflater.InflatePopup("Error", "Please choose image first", "Ok");
+                await Navigator.InflatePopup("Error", "Please choose image first", "Ok");
                 return;
             }
             if(Busy)
@@ -47,7 +47,7 @@ namespace PhotoEditor.ViewModels
 	                {
 	                    ProcessFilter(obj, options);
 	                });
-	            await PopupInflater.ShowParamsPicker(obj);
+	            await Navigator.ShowViewModel<ParamsPickerViewModel>(obj);
 	        }
 	        else
 	            ProcessFilter(obj, Enumerable.Empty<FilterOption>());
@@ -55,7 +55,7 @@ namespace PhotoEditor.ViewModels
 
 	    private void ProcessFilter(FilterType filterType, IEnumerable<FilterOption> options)
 	    {
-	        MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
+	        CleanupSubscription();
             RunInBackground(async () =>
             {
                 var executor = _executorFactory.GetExecutor().Configure(_selectedImage, filterType);
@@ -101,5 +101,15 @@ namespace PhotoEditor.ViewModels
             RaisePropertyChanged(() => ImageChosen);
             FilterCommand.ChangeCanExecute();
         }
+
+	    private void CleanupSubscription()
+	    {
+	        MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
+        }
+
+        public void OnBack()
+	    {
+	        CleanupSubscription();
+	    }
 	}
 }

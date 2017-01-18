@@ -48,7 +48,7 @@
     <Compile Include="Services\Interfaces\IFilterExecutor.cs" />
     <Compile Include="Services\Interfaces\IFilterExecutorFactory.cs" />
     <Compile Include="Services\Interfaces\IFiltersProvider.cs" />
-    <Compile Include="Services\Interfaces\IPopupInflater.cs" />
+    <Compile Include="Services\Interfaces\INavigator.cs" />
     <Compile Include="Services\Interfaces\ISoapServiceClient.cs" />
     <Compile Include="Services\SoapServiceClient.cs" />
     <Compile Include="Utility\Bootstrapper.cs" />
@@ -57,6 +57,7 @@
     <Compile Include="Utility\FilterType.cs" />
     <Compile Include="Utility\ServicesModule.cs" />
     <Compile Include="Utility\ViewModelsModule.cs" />
+    <Compile Include="ViewModels\IBackable.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FilterNO.cs" />
     <Compile Include="ViewModels\FilterOption.cs" />

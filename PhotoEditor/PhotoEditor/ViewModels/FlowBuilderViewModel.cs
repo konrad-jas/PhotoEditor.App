@@ -9,21 +9,21 @@ using Xamarin.Forms;
 
 namespace PhotoEditor.ViewModels
 {
-	public class FlowBuilderViewModel : BaseViewModel
+	public class FlowBuilderViewModel : BaseViewModel, IBackable
 	{
 	    private readonly IFilterExecutorFactory _executorFactory;
 	    private readonly IImageProvider _imageProvider;
 	    private readonly IFiltersProvider _filtersProvider;
         private MemoryStream _selectedImage;
 
-        public FlowBuilderViewModel(IPopupInflater popupInflater, IFilterExecutorFactory executorFactory,
-	        IImageProvider imageProvider, IFiltersProvider filtersProvider) : base(popupInflater)
+        public FlowBuilderViewModel(INavigator navigator, IFilterExecutorFactory executorFactory,
+	        IImageProvider imageProvider, IFiltersProvider filtersProvider) : base(navigator)
 	    {
 	        _executorFactory = executorFactory;
 	        _imageProvider = imageProvider;
 	        _filtersProvider = filtersProvider;
 
-            AddFilterCommand = new Command<FilterNO>(AddFilterAction);
+            AddFilterCommand = new Command(AddFilterAction);
             RemoveFilterCommand = new Command<ParametrizedFilter>(RemoveFilterAction);
             SelectedFilters = new ObservableCollection<ParametrizedFilter>();
             SelectParametersCommand = new Command<ParametrizedFilter>(SelectParamsAction);
@@ -72,13 +72,13 @@ namespace PhotoEditor.ViewModels
                 {
                     UpdateOptions(obj, options);
                 });
-                await PopupInflater.ShowParamsPicker(obj.FilterType);
+                await Navigator.ShowViewModel<ParamsPickerViewModel>(obj.FilterType);
             }
 	    }
 
 	    private void UpdateOptions(ParametrizedFilter parametrizedFilter, IEnumerable<FilterOption> options)
 	    {
-            MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
+            CleanupSubscription();
 	        parametrizedFilter.Options = options;
 	    }
 
@@ -91,17 +91,17 @@ namespace PhotoEditor.ViewModels
 	    public ObservableCollection<ParametrizedFilter> SelectedFilters { get; set; }
 
 	    public Command AddFilterCommand { get; set; }
-	    private void AddFilterAction(FilterNO filter)
+	    private void AddFilterAction()
 	    {
-	        var parametrized = new ParametrizedFilter
-	        {
-	            Name = filter.Name,
-	            FilterType = filter.Type,
-	            Options = _filtersProvider.GetFilterOptions(filter.Type),
-                Command = SelectParametersCommand,
-                RemoveCommand = RemoveFilterCommand
-	        };
-            SelectedFilters.Add(parametrized);
+	        //var parametrized = new ParametrizedFilter
+	        //{
+	        //    Name = filter.Name,
+	        //    FilterType = filter.Type,
+	        //    Options = _filtersProvider.GetFilterOptions(filter.Type),
+         //       Command = SelectParametersCommand,
+         //       RemoveCommand = RemoveFilterCommand
+	        //};
+            //SelectedFilters.Add(parametrized);
 	    }
 
         private async Task SetImageSource(Stream imageStream)
@@ -119,5 +119,14 @@ namespace PhotoEditor.ViewModels
 
         public bool ImageChosen => ImageSource != null;
         public ImageSource ImageSource { get; set; }
+	    public void OnBack()
+	    {
+	        CleanupSubscription();
+	    }
+
+	    private void CleanupSubscription()
+	    {
+            MessagingCenter.Unsubscribe<ParamsPickerViewModel>(this, "Process");
+        }
     }
 }
