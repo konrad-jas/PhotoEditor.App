@@ -35,8 +35,11 @@ namespace PhotoEditor.Views
             await DisplayAlert(title, message, confirmation);
         }
 
-        public async Task ShowViewModel<TViewModel>(object args = null) where TViewModel : BaseViewModel
+        public async Task<bool> ShowViewModel<TViewModel>(object args = null) where TViewModel : BaseViewModel
         {
+            if (Navigation.NavigationStack.Last().BindingContext.GetType() == typeof (TViewModel))
+                return false;
+
             var page = (ContentPage)App.Container.Get(_viewsDictionary[typeof (TViewModel)]);
             var vm = App.Container.Get<TViewModel>();
             if(args != null)
@@ -44,6 +47,7 @@ namespace PhotoEditor.Views
 
             page.BindingContext = vm;
             await Navigation.PushAsync(page, true);
+            return true;
         }
 
         private readonly Dictionary<Type, Type> _viewsDictionary = new Dictionary<Type, Type>

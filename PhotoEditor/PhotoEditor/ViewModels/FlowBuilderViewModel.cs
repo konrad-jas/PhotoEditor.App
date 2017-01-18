@@ -67,13 +67,16 @@ namespace PhotoEditor.ViewModels
 	    {
 	        if (obj.Options.Any())
 	        {
-                MessagingCenter.Subscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process",
+	            var navigated = await Navigator.ShowViewModel<ParamsPickerViewModel>(obj.FilterType);
+                if(navigated == false)
+                    return;
+
+	            MessagingCenter.Subscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process",
                 (model, options) =>
                 {
                     UpdateOptions(obj, options);
                 });
-                await Navigator.ShowViewModel<ParamsPickerViewModel>(obj.FilterType);
-            }
+	        }
 	    }
 
 	    private void UpdateOptions(ParametrizedFilter parametrizedFilter, IEnumerable<FilterOption> options)
@@ -93,9 +96,10 @@ namespace PhotoEditor.ViewModels
 	    public Command AddFilterCommand { get; set; }
 	    private async void AddFilterAction()
 	    {
-            MessagingCenter.Subscribe<FilterPickerViewModel, FilterNO>(this, "FilterPicked", FilterPicked);
-	        await Navigator.ShowViewModel<FilterPickerViewModel>();
-        }
+	        var navigated = await Navigator.ShowViewModel<FilterPickerViewModel>();
+            if(navigated)
+	            MessagingCenter.Subscribe<FilterPickerViewModel, FilterNO>(this, "FilterPicked", FilterPicked);
+	    }
 
 	    private void FilterPicked(FilterPickerViewModel filterPickerViewModel, FilterNO filterNo)
 	    {

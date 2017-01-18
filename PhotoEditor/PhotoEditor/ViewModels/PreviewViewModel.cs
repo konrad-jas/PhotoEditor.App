@@ -42,12 +42,15 @@ namespace PhotoEditor.ViewModels
 
             if (_filtersProvider.GetFilterOptions(obj).Any())
 	        {
+	            var navigated = await Navigator.ShowViewModel<ParamsPickerViewModel>(obj);
+                if(navigated == false)
+                    return;
+
 	            MessagingCenter.Subscribe<ParamsPickerViewModel, IEnumerable<FilterOption>>(this, "Process",
 	                (model, options) =>
 	                {
 	                    ProcessFilter(obj, options);
 	                });
-	            await Navigator.ShowViewModel<ParamsPickerViewModel>(obj);
 	        }
 	        else
 	            ProcessFilter(obj, Enumerable.Empty<FilterOption>());
