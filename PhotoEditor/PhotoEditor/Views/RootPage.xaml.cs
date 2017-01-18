@@ -37,7 +37,8 @@ namespace PhotoEditor.Views
 
         public async Task<bool> ShowViewModel<TViewModel>(object args = null) where TViewModel : BaseViewModel
         {
-            if (Navigation.NavigationStack.Last().BindingContext.GetType() == typeof (TViewModel))
+            var visibleVm = Navigation.NavigationStack.Last().BindingContext;
+            if(visibleVm != null && Navigation.NavigationStack.Last().BindingContext.GetType() == typeof(TViewModel))
                 return false;
 
             var page = (ContentPage)App.Container.Get(_viewsDictionary[typeof (TViewModel)]);
