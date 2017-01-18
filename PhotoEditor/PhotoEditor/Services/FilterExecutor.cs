@@ -70,6 +70,7 @@ namespace PhotoEditor.Services
                     break;
             }
             var resultDecoded = DecodeImage(result);
+            _image = null;
             return resultDecoded;
         }
 

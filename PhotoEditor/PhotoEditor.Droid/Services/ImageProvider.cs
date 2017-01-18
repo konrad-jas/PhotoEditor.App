@@ -23,6 +23,7 @@ namespace PhotoEditor.Droid.Services
                 var img = await picker.SelectPhotoAsync(new CameraMediaStorageOptions {PercentQuality = 100});
                 var memoryStream = new MemoryStream();
                 await img.Source.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
                 img.Dispose();
                 return memoryStream;
             }

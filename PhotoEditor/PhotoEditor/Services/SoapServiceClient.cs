@@ -66,12 +66,23 @@ namespace PhotoEditor.Services
 
         public async Task<string> Grayscale(string image)
         {
-            var completionSource = CreateCompletionSource<string>();
-            var handler = new EventHandler<GrayScaleConversionCompletedEventArgs>(
-                (sender, args) => { CompleteTask(completionSource, args, () => args.Result); });
-            _client.GrayScaleConversionCompleted += handler;
-            _client.GrayScaleConversionAsync(image);
-            return await CreateContinuationTask(completionSource.Task, () => _client.GrayScaleConversionCompleted-= handler);
+            try
+            {
+                var completionSource = CreateCompletionSource<string>();
+                var handler = new EventHandler<GrayScaleConversionCompletedEventArgs>(
+                    (sender, args) => { CompleteTask(completionSource, args, () => args.Result); });
+                _client.GrayScaleConversionCompleted += handler;
+                _client.GrayScaleConversionAsync(image);
+                return
+                    await
+                        CreateContinuationTask(completionSource.Task,
+                            () => _client.GrayScaleConversionCompleted -= handler);
+            }
+            catch (Exception ex)
+            {
+                var test = ex;
+                throw;
+            }
         }
 
         public async Task<string> MakeBorder(string image, int top, int left, int bottom, int right)

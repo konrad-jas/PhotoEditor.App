@@ -9,7 +9,7 @@ namespace PhotoEditor.ViewModels
 	public abstract class BaseViewModel : NotificationObject
 	{
 		public bool Busy { get; private set; }
-		private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
+		private readonly ManualResetEvent _resetEvent = new ManualResetEvent(true);
 
 	    public virtual void Init(object args)
 	    {
