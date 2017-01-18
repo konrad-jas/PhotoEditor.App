@@ -44,7 +44,9 @@
     <Compile Include="Services\FilterExecutor.cs" />
     <Compile Include="Services\FiltersProvider.cs" />
     <Compile Include="Services\FilterExecutorFactory.cs" />
+    <Compile Include="Services\Interfaces\ICompositeFilterExecutor.cs" />
     <Compile Include="Services\Interfaces\IConfiguredFilterExecutor.cs" />
+    <Compile Include="Services\Interfaces\IStandardExecutor.cs" />
     <Compile Include="Services\Interfaces\IFilterExecutor.cs" />
     <Compile Include="Services\Interfaces\IFilterExecutorFactory.cs" />
     <Compile Include="Services\Interfaces\IFiltersProvider.cs" />

@@ -61,10 +61,10 @@ namespace PhotoEditor.ViewModels
 	        CleanupSubscription();
             RunInBackground(async () =>
             {
-                var executor = _executorFactory.GetExecutor().Configure(_selectedImage, filterType);
+                var executor = _executorFactory.GetExecutor().Configure(_selectedImage).ForFilter(filterType);
                 foreach (var option in options)
                 {
-                    executor.AddParameter(option.Value);
+                    executor.WithParameter(option.Value);
                 }
                 return await executor.ExecuteFilter();
             }, async image => await SetImageSource(image));

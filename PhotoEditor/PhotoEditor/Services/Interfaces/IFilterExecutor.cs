@@ -5,6 +5,6 @@ namespace PhotoEditor.Services.Interfaces
 {
     public interface IFilterExecutor
     {
-        IConfiguredFilterExecutor Configure(MemoryStream imageStream, FilterType filterType);
+        IConfiguredFilterExecutor Configure(MemoryStream imageStream);
     }
 }

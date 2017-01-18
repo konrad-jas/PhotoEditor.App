@@ -57,8 +57,8 @@ namespace PhotoEditor.ViewModels
 	    {
             RunInBackground(async () =>
             {
-                var executor = _executorFactory.GetExecutor().Configure(_selectedImage, FilterType.Combined);
-                return await executor.ExecuteFilter();
+                var executor = _executorFactory.GetExecutor().Configure(_selectedImage).ForCompositeFilter();
+                return await executor.ExecuteFilter(SelectedFilters.ToList());
             }, async image => await SetImageSource(image));
         }
 

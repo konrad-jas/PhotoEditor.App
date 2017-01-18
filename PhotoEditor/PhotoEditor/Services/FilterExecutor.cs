@@ -4,10 +4,11 @@ using System.IO;
 using System.Threading.Tasks;
 using PhotoEditor.Services.Interfaces;
 using PhotoEditor.Utility;
+using PhotoEditor.ViewModels;
 
 namespace PhotoEditor.Services
 {
-    public class FilterExecutor : IFilterExecutor, IConfiguredFilterExecutor
+    public class FilterExecutor : IFilterExecutor, IConfiguredFilterExecutor, IStandardExecutor, ICompositeFilterExecutor
     {
         private readonly ISoapServiceClient _soapServiceClient;
         private readonly List<int> _parameters;
@@ -20,14 +21,13 @@ namespace PhotoEditor.Services
             _parameters = new List<int>();
         }
 
-        public IConfiguredFilterExecutor Configure(MemoryStream imageStream, FilterType filterType)
+        public IConfiguredFilterExecutor Configure(MemoryStream imageStream)
         {
             _image = imageStream;
-            _filterType = filterType;
             return this;
         }
 
-        public IConfiguredFilterExecutor AddParameter(int parameter)
+        public IConfiguredFilterExecutor WithParameter(int parameter)
         {
             _parameters.Add(parameter);
             return this;
@@ -84,6 +84,22 @@ namespace PhotoEditor.Services
         {
             var bytes = Convert.FromBase64String(image);
             return new MemoryStream(bytes);
+        }
+
+        public IStandardExecutor ForFilter(FilterType filterType)
+        {
+            _filterType = filterType;
+            return this;
+        }
+
+        public ICompositeFilterExecutor ForCompositeFilter()
+        {
+            return this;
+        }
+
+        public Task<Stream> ExecuteFilter(IEnumerable<ParametrizedFilter> filters)
+        {
+            
         }
     }
 }

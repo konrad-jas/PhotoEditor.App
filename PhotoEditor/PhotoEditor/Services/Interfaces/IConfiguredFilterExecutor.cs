@@ -1,11 +1,10 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using PhotoEditor.Utility;
 
 namespace PhotoEditor.Services.Interfaces
 {
     public interface IConfiguredFilterExecutor
     {
-        IConfiguredFilterExecutor AddParameter(int parameter);
-        Task<Stream> ExecuteFilter();
+        IStandardExecutor ForFilter(FilterType filterType);
+        ICompositeFilterExecutor ForCompositeFilter();
     }
 }
