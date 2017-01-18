@@ -106,5 +106,15 @@ namespace PhotoEditor.Services
             _client.TresholdAsync(image, threshold, maxVal);
             return await CreateContinuationTask(completionSource.Task, () => _client.TresholdCompleted -= handler);
         }
+
+        public async Task<string> CompositeFilter(string image, string filter)
+        {
+            var completionSource = CreateCompletionSource<string>();
+            var handler = new EventHandler<CombineFiltersCompletedEventArgs>(
+                (sender, args) => { CompleteTask(completionSource, args, () => args.Result); });
+            _client.CombineFiltersCompleted += handler;
+            _client.CombineFiltersAsync(image,filter);
+            return await CreateContinuationTask(completionSource.Task, () => _client.CombineFiltersCompleted -= handler);
+        }
     }
 }

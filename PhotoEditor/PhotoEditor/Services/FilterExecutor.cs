@@ -12,7 +12,7 @@ namespace PhotoEditor.Services
     {
         private readonly ISoapServiceClient _soapServiceClient;
         private readonly List<int> _parameters;
-        private MemoryStream _image;
+        private string _image;
         private FilterType _filterType;
 
         public FilterExecutor(ISoapServiceClient soapServiceClient)
@@ -23,7 +23,7 @@ namespace PhotoEditor.Services
 
         public IConfiguredFilterExecutor Configure(MemoryStream imageStream)
         {
-            _image = imageStream;
+            _image = EncodeImage(imageStream);
             return this;
         }
 
@@ -35,42 +35,40 @@ namespace PhotoEditor.Services
 
         public async Task<Stream> ExecuteFilter()
         {
-            var imageEncoded = EncodeImage(_image);
             var result = string.Empty;
             switch (_filterType)
             {
                 case FilterType.Gauss:
-                    result = await _soapServiceClient.Gauss(imageEncoded, _parameters[0]);
+                    result = await _soapServiceClient.Gauss(_image, _parameters[0]);
                     break;
                 case FilterType.MakeBorder:
                     result =
-                        await _soapServiceClient.MakeBorder(imageEncoded, _parameters[0], _parameters[1], _parameters[2],
+                        await _soapServiceClient.MakeBorder(_image, _parameters[0], _parameters[1], _parameters[2],
                             _parameters[3]);
                     break;
                 case FilterType.Sharpen:
-                    result = await _soapServiceClient.Sharpen(imageEncoded);
+                    result = await _soapServiceClient.Sharpen(_image);
                     break;
                 case FilterType.ChangeBrightness:
-                    result = await _soapServiceClient.ChangeBrightness(imageEncoded, _parameters[0], _parameters[1]);
+                    result = await _soapServiceClient.ChangeBrightness(_image, _parameters[0], _parameters[1]);
                     break;
                 case FilterType.Flip:
-                    result = await _soapServiceClient.Flip(imageEncoded, _parameters[0]);
+                    result = await _soapServiceClient.Flip(_image, _parameters[0]);
                     break;
                 case FilterType.Threshold:
-                    result = await _soapServiceClient.Threshold(imageEncoded, _parameters[0], _parameters[1]);
+                    result = await _soapServiceClient.Threshold(_image, _parameters[0], _parameters[1]);
                     break;
                 case FilterType.Dilate:
-                    result = await _soapServiceClient.Dialte(imageEncoded, _parameters[0]);
+                    result = await _soapServiceClient.Dialte(_image, _parameters[0]);
                     break;
                 case FilterType.Erode:
-                    result = await _soapServiceClient.Erode(imageEncoded, _parameters[0]);
+                    result = await _soapServiceClient.Erode(_image, _parameters[0]);
                     break;
                 case FilterType.GrayScale:
-                    result = await _soapServiceClient.Grayscale(imageEncoded);
+                    result = await _soapServiceClient.Grayscale(_image);
                     break;
             }
             var resultDecoded = DecodeImage(result);
-            _image = null;
             return resultDecoded;
         }
 
@@ -97,9 +95,11 @@ namespace PhotoEditor.Services
             return this;
         }
 
-        public Task<Stream> ExecuteFilter(IEnumerable<ParametrizedFilter> filters)
+        public async Task<Stream> ExecuteFilter(IEnumerable<ParametrizedFilter> filters)
         {
-            
+            var filter = CompositeFilterBuilder.Build(filters);
+            var result = await _soapServiceClient.CompositeFilter(_image, filter);
+            return DecodeImage(result);
         }
     }
 }
