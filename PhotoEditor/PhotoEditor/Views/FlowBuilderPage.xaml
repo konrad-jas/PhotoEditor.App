@@ -21,7 +21,7 @@
       <ColumnDefinition Width="*"></ColumnDefinition>
       <ColumnDefinition Width="*"></ColumnDefinition>
     </Grid.ColumnDefinitions>
-    <views:BusyIndicator/>
+    <views:BusyIndicator Grid.ColumnSpan="2"/>
     <Button BorderColor="Blue" BorderWidth="10"
       Text="Tap to select image"
       Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0"
